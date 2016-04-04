@@ -39,7 +39,9 @@ Toolbar.Tools.New.Size.Y = 20;
 Toolbar.Tools.New.Parent = Toolbar;
 Toolbar.Tools.New.Visible = true;
 Toolbar.Tools.New.Clicked = function()
-	require("TestUI").newTest.toggleVisiblity();
+	if not require("TestUI").newTest.Details.Visible then
+		require("TestUI").newTest.toggleVisiblity();
+	end
 end
 
 Toolbar.Tools.Edit = {};
