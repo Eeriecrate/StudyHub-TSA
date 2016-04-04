@@ -1,20 +1,20 @@
 Data = {};
 Data.Tests = {};
-love.filesystem.setIdentity("NewTest")
+love.filesystem.setIdentity("Data")
 
 function Data.saveTests()
 	jsar = require("json").encode(Data.Tests);
-	if love.filesystem.exists("Test.lua") then
-		love.filesystem.write("Test.lua",jsar);
+	if love.filesystem.exists("Tests.txt") then
+		love.filesystem.write("Tests.txt",jsar);
 	else
-		file = love.filesystem.newFile("Tests.lua");
-		love.filesystem.write("Test.lua",jsar);
+		file = love.filesystem.newFile("Tests.txt");
+		love.filesystem.write("Tests.txt",jsar);
 	end
 end
 
 function Data.loadTests()
-	if love.filesystem.exists("Test.lua") then
-		return tostring(love.filesystem.read("Test.lua"));
+	if love.filesystem.exists("Tests.txt") then
+		return tostring(love.filesystem.read("Tests.txt"));
 	else
 		return "[]";
 	end

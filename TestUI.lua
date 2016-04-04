@@ -51,10 +51,10 @@ TU.newTest.Confirm.Text = "Next";
 table.insert(require("MouseFunctions").Available,TU.newTest.Confirm);
 function TU.newTest.Confirm.Clicked()
 	TU.newTest.toggleVisiblity();
-	TU.newTest.TitleInput.Text = "Type title here";
 	TU.localTest = {};
 	TU.localTest.Questions = {};
-	--TU.localTest.Name = TU.newTest.TitleInput.Text;
+	TU.localTest.Name = TU.newTest.TitleInput.Text;
+	TU.newTest.TitleInput.Text = "Type title here";
 	TU.newTest.Details.Visible = true;
 end
 
@@ -191,22 +191,17 @@ function TU.newTest.Finish.Clicked()
 	end
 end
 
-TU.newTest.Warning = {};
-TU.newTest.Warning.Counter = 0;
-TU.newTest.Warning.Visible = true;
-TU.newTest.Warning.Parent = TU.newTest.Details;
-TU.newTest.Warning.Size = {};
-TU.newTest.Warning.Size.X = 770;
-TU.newTest.Warning.Size.Y = 20;
-TU.newTest.Warning.Scale = {};
-TU.newTest.Warning.Scale.X = 1;
-TU.newTest.Warning.Scale.Y = 1;
-TU.newTest.Warning.Position = {};
-TU.newTest.Warning.Position.X = ((love.graphics.getWidth()/2)-(TU.newTest.Warning.Size.X/2));
-TU.newTest.Warning.Position.Y = ((love.graphics.getHeight()/2)-(TU.newTest.Warning.Size.Y/2))+75;
-TU.newTest.Warning.Text = "MINIMUM OF 4 QUESTIONS";
-
-
+TU.Delete = {};
+TU.Delete.Visible = true;
+TU.Delete.Frame = {};
+TU.Delete.Frame.Visible = true;
+TU.Delete.Frame.Parent = TU.newTest;
+TU.Delete.Frame.Size = {};
+TU.Delete.Frame.Size.X = 770;
+TU.Delete.Frame.Size.Y = 150;
+TU.Delete.Frame.Position = {};
+TU.Delete.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Frame.Size.X/2));
+TU.Delete.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Frame.Size.Y/2));
 
 function TU.newTest.toggleVisiblity()
 	--[[I guess using the operator should probably save it from having to use logic.]]--

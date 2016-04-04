@@ -7,22 +7,20 @@ function love.load()
 	TestUI = require("TestUI");
 	love.graphics.setDefaultFilter("nearest", "nearest")
 	Data = require("Data");
-	love.window.setTitle(Data.loadTests().." : "..love.filesystem.getUserDirectory());
 	Tests = JSON.decode(Data.loadTests());
 	if #Tests ~= 0 then
 		for i,v in pairs(Tests) do
 			table.insert(require("Data").Tests,v);
 		end
 	end
-
 end
 
+
 function love.update()
-	---love.window.setTitle( "TestHub: "..love.timer.getFPS( ).." FPS : "..love.filesystem.getUserDirectory());
+	love.window.setTitle( "TestHub: "..love.timer.getFPS( ).." FPS")
 	Toolbar.updatePositions();
 	TestUI.updatePositions();
 	Mouse.updateProperties();
-	print(#(require("Data").Tests));
 end
 
 function love.mousepressed()

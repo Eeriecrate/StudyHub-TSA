@@ -47,7 +47,7 @@ end
 Toolbar.Tools.Edit = {};
 table.insert(require("MouseFunctions").Available,Toolbar.Tools.Edit);
 Toolbar.Tools.Edit.Scale = {};
-Toolbar.Tools.Edit.Text = "Edit";
+Toolbar.Tools.Edit.Text = "Test";
 Toolbar.Tools.Edit.Scale.X = 1;
 Toolbar.Tools.Edit.Scale.Y = 1;
 Toolbar.Tools.Edit.Position = {};
