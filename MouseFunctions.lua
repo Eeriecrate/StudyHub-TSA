@@ -9,6 +9,7 @@ function Mouse.updateProperties()
 	Mouse.Y = love.mouse.getY();
 end
 
+
 function Mouse.isHoveringOver(X,Y,v)
 	if v.Visible and v.Parent.Visible and (X >= v.Position.X and X <= (v.Position.X+(v.Size.X*v.Scale.X)) and Y >= v.Position.Y and Y <= (v.Position.Y+(v.Size.Y*v.Scale.Y))) then
 		return true;

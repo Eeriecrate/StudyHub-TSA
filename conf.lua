@@ -3,7 +3,7 @@ function love.conf(t)
     t.version = "0.9.2"                
     t.console = true                 
     
-    t.window.title = "StudyHub"       
+    t.window.title = "TestHub"
     --t.window.icon = "Icon.png"               
     t.window.width = 800             
     t.window.height = 600           
@@ -13,7 +13,7 @@ function love.conf(t)
     t.window.minheight = 600           
     t.window.fullscreen = false        
     t.window.fullscreentype = "desktop"
-    t.window.vsync = false        
+    t.window.vsync = true        
     t.window.fsaa = 0                
     t.window.display = 1             
     t.window.highdpi = false       

@@ -7,6 +7,7 @@ function love.load()
 	TestUI = require("TestUI");
 	love.graphics.setDefaultFilter("nearest", "nearest")
 	Data = require("Data");
+	love.window.setTitle(Data.loadTests().." : "..love.filesystem.getUserDirectory());
 	Tests = JSON.decode(Data.loadTests());
 	if #Tests ~= 0 then
 		for i,v in pairs(Tests) do
@@ -17,7 +18,7 @@ function love.load()
 end
 
 function love.update()
-	love.window.setTitle( "StudyHub: "..love.timer.getFPS( ).." FPS");
+	---love.window.setTitle( "TestHub: "..love.timer.getFPS( ).." FPS : "..love.filesystem.getUserDirectory());
 	Toolbar.updatePositions();
 	TestUI.updatePositions();
 	Mouse.updateProperties();
@@ -42,7 +43,7 @@ function love.draw()
 	love.graphics.draw(Toolbar.Resize.image,Toolbar.Resize.Position.X,Toolbar.Resize.Position.Y,0,Toolbar.Resize.Scale.X,Toolbar.Resize.Scale.Y);
 	love.graphics.setColor( 159,82,31,255 )
 	for i,v in pairs(Toolbar.Tools) do
-		love.graphics.setColor( 159,82,31,225)
+		love.graphics.setColor( 0,0,0,225)
 		love.graphics.print(v.Text, ((v.Position.X+(v.Size.X/2))-love.graphics.getFont():getWidth(v.Text)/2), v.Position.Y+(v.Size.Y/2)-6)
 		if Mouse.isHoveringOver(Mouse.X,Mouse.Y,v) then
 			love.graphics.setColor( 159,82,31,255/2 )
@@ -62,9 +63,9 @@ function love.draw()
 			love.graphics.rectangle("fill",TestUI.newTest.Title.Position.X,TestUI.newTest.Title.Position.Y,TestUI.newTest.Title.Size.X,20);
 			love.graphics.setColor( 159,82,31,255/4 )
 			love.graphics.rectangle("fill",TestUI.newTest.TitleInput.Position.X,TestUI.newTest.TitleInput.Position.Y,TestUI.newTest.TitleInput.Size.X,TestUI.newTest.TitleInput.Size.Y);
-			love.graphics.setColor( 159,82,31,225)
+			love.graphics.setColor( 0,0,0,225)
 			love.graphics.print(TestUI.newTest.TitleInput.Text, ((TestUI.newTest.TitleInput.Position.X+(TestUI.newTest.TitleInput.Size.X/2))-love.graphics.getFont():getWidth(TestUI.newTest.TitleInput.Text)/2), TestUI.newTest.TitleInput.Position.Y+4);
-			love.graphics.setColor( 159,82,31,225);
+			love.graphics.setColor( 0,0,0,225);
 			love.graphics.print("Pick a name for the test.", ((TestUI.newTest.Title.Position.X+(TestUI.newTest.Title.Size.X/2))-love.graphics.getFont():getWidth("Pick a name for the test.")/2), TestUI.newTest.Title.Position.Y+5);
 			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.newTest.Confirm) then
 				love.graphics.setColor( 159,82,31,255/2 )
@@ -72,7 +73,7 @@ function love.draw()
 				love.graphics.setColor( 159,82,31,255/4 )
 			end
 			love.graphics.rectangle("fill",TestUI.newTest.Confirm.Position.X,TestUI.newTest.Confirm.Position.Y,TestUI.newTest.Confirm.Size.X,TestUI.newTest.Confirm.Size.Y);
-			love.graphics.setColor( 159,82,31,225)
+			love.graphics.setColor( 0,0,0,225)
 			love.graphics.print(TestUI.newTest.Confirm.Text, ((TestUI.newTest.Confirm.Position.X+(TestUI.newTest.Confirm.Size.X/2))-love.graphics.getFont():getWidth(TestUI.newTest.Confirm.Text)/2), TestUI.newTest.Confirm.Position.Y+4);
 			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.newTest.Cancel) then
 				love.graphics.setColor( 159,82,31,255/2 )
@@ -80,7 +81,7 @@ function love.draw()
 				love.graphics.setColor( 159,82,31,255/4 )
 			end
 			love.graphics.rectangle("fill",TestUI.newTest.Cancel.Position.X,TestUI.newTest.Cancel.Position.Y,TestUI.newTest.Cancel.Size.X,TestUI.newTest.Cancel.Size.Y);
-			love.graphics.setColor( 159,82,31,225)
+			love.graphics.setColor( 0,0,0,225)
 			love.graphics.print(TestUI.newTest.Cancel.Text, ((TestUI.newTest.Cancel.Position.X+(TestUI.newTest.Cancel.Size.X/2))-love.graphics.getFont():getWidth(TestUI.newTest.Cancel.Text)/2), TestUI.newTest.Cancel.Position.Y+4);
 		elseif TestUI.newTest.Details.Visible then
 			love.graphics.setColor( 255/3,127/3,39/3,225);

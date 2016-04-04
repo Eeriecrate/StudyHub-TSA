@@ -54,7 +54,7 @@ function TU.newTest.Confirm.Clicked()
 	TU.newTest.TitleInput.Text = "Type title here";
 	TU.localTest = {};
 	TU.localTest.Questions = {};
-	TU.localTest.Name = TU.newTest.TitleInput.Text;
+	--TU.localTest.Name = TU.newTest.TitleInput.Text;
 	TU.newTest.Details.Visible = true;
 end
 
@@ -147,8 +147,8 @@ table.insert(require("MouseFunctions").Available,TU.newTest.Next);
 function TU.newTest.Next.Clicked()
 	if TU.newTest.Answer.Text ~= "Type answer here" and TU.newTest.Question.Text ~= "Type question here" then
 		local Question = {};
-		Question.Question = TU.newTest.Question.Text;
-		Question.Answer = TU.newTest.Answer.Text;
+		Question.Q = TU.newTest.Question.Text;
+		Question.A = TU.newTest.Answer.Text;
 		TU.newTest.Answer.Text = "Type answer here";
 		TU.newTest.Question.Text = "Type question here";
 		table.insert(TU.localTest.Questions,Question);
@@ -173,8 +173,8 @@ function TU.newTest.Finish.Clicked()
 	if TU.newTest.Answer.Text ~= "Type answer here" and TU.newTest.Question.Text ~= "Type question here" then
 		if not(#TU.localTest.Questions < 4) then
 		local Question = {};
-		Question.Question = TU.newTest.Question.Text;
-		Question.Answer = TU.newTest.Answer.Text;
+		Question.Q = TU.newTest.Question.Text;
+		Question.A = TU.newTest.Answer.Text;
 		TU.newTest.Answer.Text = "Type answer here";
 		TU.newTest.Question.Text = "Type question here";
 		table.insert(TU.localTest.Questions,Question);
@@ -187,6 +187,7 @@ function TU.newTest.Finish.Clicked()
 	else
 		TU.newTest.Details.Visible = false;
 		table.insert(require("Data").Tests,TU.localTest);
+		require("Data").saveTests()
 	end
 end
 
