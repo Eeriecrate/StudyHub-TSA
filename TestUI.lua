@@ -409,7 +409,7 @@ TU.Test.Frame.Visible = true;
 TU.Test.Frame.Parent = TU.Test;
 TU.Test.Frame.Size = {};
 TU.Test.Frame.Size.X = 760;
-TU.Test.Frame.Size.Y = 560;
+TU.Test.Frame.Size.Y = 500;
 TU.Test.Frame.Scale = {};
 TU.Test.Frame.Scale.X = 1;
 TU.Test.Frame.Scale.Y = 1;
@@ -516,8 +516,13 @@ function TU.generateAnswers()
 		table.remove(TU.localAnswers,Number);
 	end
 	local List = {TU.Test.A,TU.Test.B,TU.Test.C,TU.Test.D};
-	Th
+	for i,v in pairs(List) do
+		local Num = math.random(1,#TU.availableAnswers);
+		v.Text = TU.availableAnswers[Num];
+		table.remove(TU.availableAnswers,Num);
+	end
 end
+
 
 
 

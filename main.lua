@@ -217,7 +217,12 @@ function love.draw()
 			love.graphics.rectangle("fill",TestUI.takeTest.Confirm.Position.X,TestUI.takeTest.Confirm.Position.Y,TestUI.takeTest.Confirm.Size.X,TestUI.takeTest.Confirm.Size.Y);
 			love.graphics.setColor( 0,0,0,225)
 			love.graphics.print(TestUI.takeTest.Confirm.Text, ((TestUI.takeTest.Confirm.Position.X+(TestUI.takeTest.Confirm.Size.X/2))-love.graphics.getFont():getWidth(TestUI.takeTest.Confirm.Text)/2), TestUI.takeTest.Confirm.Position.Y+4);				
-			else
+		elseif TU.Test.Visible then
+			love.graphics.setColor( 255/1.5,127/1.5,39/1.5,225);
+			love.graphics.rectangle("fill",TestUI.Test.Frame.Position.X-3,TestUI.Test.Frame.Position.Y-3,TestUI.Test.Frame.Size.X+6,TestUI.Test.Frame.Size.Y+6);
+			love.graphics.setColor( 255,127,39,225);
+			love.graphics.rectangle("fill",TestUI.Test.Frame.Position.X,TestUI.Test.Frame.Position.Y,TestUI.Test.Frame.Size.X,TestUI.Test.Frame.Size.Y);
+		else
 			love.graphics.setColor(255,255,255,255/2)
 			love.graphics.draw(Logo,(love.graphics.getWidth()/2-(429/2)),(love.graphics.getHeight()*.33-(332/2)),0,1,1)
 
