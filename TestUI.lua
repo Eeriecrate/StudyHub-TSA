@@ -1,3 +1,6 @@
+--[[A mess of code that I imagine I could have done better using basic itteration and functions, but this won't create any
+latency since it really only runs once. It's okay for it's purpose.]]--
+
 TU = {};
 TU.localTest = {};
 TU.newTest = {};
@@ -191,18 +194,96 @@ function TU.newTest.Finish.Clicked()
 	end
 end
 
+TU.newTest.Warning = {};
+TU.newTest.Warning.Counter = 0;
+TU.newTest.Warning.Visible = true;
+TU.newTest.Warning.Parent = TU.newTest;
+TU.newTest.Warning.Size = {};
+TU.newTest.Warning.Size.X = 770;
+TU.newTest.Warning.Size.Y = 20;
+TU.newTest.Warning.Position = {};
+TU.newTest.Warning.Position.X = ((love.graphics.getWidth()/2)-(TU.newTest.Warning.Size.X/2));
+TU.newTest.Warning.Position.Y = ((love.graphics.getHeight()/2)-(TU.newTest.Warning.Size.Y/2));
+TU.newTest.Warning.Text = "MINIMUM OF 4 QUESTIONS";
+
 TU.Delete = {};
-TU.Delete.Visible = true;
+TU.Delete.Number = 1;
+TU.Delete.Visible = false;
 TU.Delete.Frame = {};
 TU.Delete.Frame.Visible = true;
-TU.Delete.Frame.Parent = TU.newTest;
+TU.Delete.Frame.Parent = TU.Delete;
 TU.Delete.Frame.Size = {};
-TU.Delete.Frame.Size.X = 770;
-TU.Delete.Frame.Size.Y = 150;
+TU.Delete.Frame.Size.X = 200;
+TU.Delete.Frame.Size.Y = 50;
+TU.Delete.Frame.Scale = {};
+TU.Delete.Frame.Scale.X = 1;
+TU.Delete.Frame.Scale.Y = 1;
 TU.Delete.Frame.Position = {};
 TU.Delete.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Frame.Size.X/2));
 TU.Delete.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Frame.Size.Y/2));
+TU.Delete.Title = {};
+TU.Delete.Title.Visible = true;
+TU.Delete.Title.Parent = TU.Delete;
+TU.Delete.Title.Size = {};
+TU.Delete.Title.Size.X = 150;
+TU.Delete.Title.Size.Y = 20;
+TU.Delete.Title.Scale = {};
+TU.Delete.Title.Scale.X = 1;
+TU.Delete.Title.Scale.Y = 1;
+TU.Delete.Title.Position = {};
+TU.Delete.Title.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Title.Size.X/2));
+TU.Delete.Title.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Title.Size.Y/2)-10);
+TU.Delete.Next = {};
+TU.Delete.Next.Visible = true;
+TU.Delete.Next.Parent = TU.Delete;
+TU.Delete.Next.Size = {};
+TU.Delete.Next.Size.X = 20;
+TU.Delete.Next.Size.Y = 20;
+TU.Delete.Next.Scale = {};
+TU.Delete.Next.Scale.X = 1;
+TU.Delete.Next.Scale.Y = 1;
+TU.Delete.Next.Position = {};
+TU.Delete.Next.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Next.Size.X/2)+87);
+TU.Delete.Next.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Next.Size.Y/2)-10);
+TU.Delete.Next.Text = ">"
+table.insert(require("MouseFunctions").Available,TU.Delete.Next);
+function TU.Delete.Next.Clicked()
+	print(TU.Delete.Number.." "..#(require("Data").Tests))
+	if #(require("Data").Tests) > 1 then
+		if TU.Delete.Number == #(require("Data").Tests) then
+			TU.Delete.Number = 1;
+		else
+			TU.Delete.Number = TU.Delete.Number + 1;
+		end
+	end
+end
+TU.Delete.Previous = {};
+TU.Delete.Previous.Visible = true;
+TU.Delete.Previous.Parent = TU.Delete;
+TU.Delete.Previous.Size = {};
+TU.Delete.Previous.Size.X = 20;
+TU.Delete.Previous.Size.Y = 20;
+TU.Delete.Previous.Scale = {};
+TU.Delete.Previous.Scale.X = 1;
+TU.Delete.Previous.Scale.Y = 1;
+TU.Delete.Previous.Position = {};
+TU.Delete.Previous.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Previous.Size.X/2)-87);
+TU.Delete.Previous.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Previous.Size.Y/2)-10);
+TU.Delete.Previous.Text = ">"
+table.insert(require("MouseFunctions").Available,TU.Delete.Previous);
+function TU.Delete.Previous.Clicked()
+	if #(require("Data").Tests) > 1 then
+		if TU.Delete.Number == 1 then
+			TU.Delete.Number = #(require("Data").Tests);
+		else
+			TU.Delete.Number = TU.Delete.Number - 1;
+		end
+	end
+end
 
+
+--[[Not sure why I only made this for one peice of the code, I had a different method in mind at this point.]]--
+--[[It would be nice to consider converting this to my newer method using a parent property]]--
 function TU.newTest.toggleVisiblity()
 	--[[I guess using the operator should probably save it from having to use logic.]]--
 	TU.newTest.Visible = not TU.newTest.Visible;
@@ -212,6 +293,11 @@ function TU.newTest.toggleVisiblity()
 	TU.newTest.Cancel.Visible = TU.newTest.Visible;
 end
 
+
+--[[This is such a terrible way to do this, but I'm in a rush to get this done after completely redoing it.]]--
+--[[Consider redoing this part?]]--
+--[[Iteration could be good if I had a "static" variable? I don't think iteration would make anything other than concise, though.]]--
+--[[That would also add more variables for the script to consider as well if I did it that way, though. Perhaps that's not a good idea? This may just be the best way.]]--
 function TU.updatePositions()
 	TU.newTest.Title.Position.X = ((love.graphics.getWidth()/2)-(TU.newTest.Title.Size.X/2));
 	TU.newTest.Title.Position.Y = ((love.graphics.getHeight()/2)-(TU.newTest.Title.Size.Y/2));
@@ -235,6 +321,14 @@ function TU.updatePositions()
 	TU.newTest.Next.Position.Y = ((love.graphics.getHeight()/2)-(TU.newTest.Next.Size.Y/2))+35;
 	TU.newTest.Warning.Position.X = ((love.graphics.getWidth()/2)-(TU.newTest.Warning.Size.X/2));
 	TU.newTest.Warning.Position.Y = ((love.graphics.getHeight()/2)-(TU.newTest.Warning.Size.Y/2))+75;
+	TU.Delete.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Frame.Size.X/2));
+	TU.Delete.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Frame.Size.Y/2));
+	TU.Delete.Title.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Title.Size.X/2));
+	TU.Delete.Title.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Title.Size.Y/2)-10);
+	TU.Delete.Next.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Next.Size.X/2)+87);
+	TU.Delete.Next.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Next.Size.Y/2)-10);
+	TU.Delete.Previous.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Previous.Size.X/2)-87);
+	TU.Delete.Previous.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Previous.Size.Y/2)-10);
 end
 
 

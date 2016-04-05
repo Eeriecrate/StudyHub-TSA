@@ -29,6 +29,8 @@ function love.mousepressed()
 	end
 end
 
+--[[This could have all been done pretty easily with iteration and it would have been much cleaner, but once again I'm crunched
+for time after completely redoing the project.]]--
 function love.draw()
 	love.graphics.setColor( 255,255,255,255 )
 	love.graphics.setBackgroundColor(255,255,255);
@@ -132,6 +134,38 @@ function love.draw()
 				love.graphics.setColor( 255,255,255,225)
 				love.graphics.print(TestUI.newTest.Warning.Text, ((TestUI.newTest.Warning.Position.X+(TestUI.newTest.Warning.Size.X/2))-love.graphics.getFont():getWidth(TestUI.newTest.Warning.Text)/2), TestUI.newTest.Warning.Position.Y+4);
 			end
+		elseif TestUI.Delete.Visible then
+			love.graphics.setColor( 255/1.5,127/1.5,39/1.5,225);
+			love.graphics.rectangle("fill",TestUI.Delete.Frame.Position.X,
+				TestUI.Delete.Frame.Position.Y+2,
+				TestUI.Delete.Frame.Size.X,
+				TestUI.Delete.Frame.Size.Y);
+			love.graphics.setColor( 255,127,39,225);
+			love.graphics.rectangle("fill",TestUI.Delete.Frame.Position.X,TestUI.Delete.Frame.Position.Y,TestUI.Delete.Frame.Size.X,TestUI.Delete.Frame.Size.Y);
+			love.graphics.setColor( 159,82,31,255/4 );
+			love.graphics.rectangle("fill",TestUI.Delete.Title.Position.X,TestUI.Delete.Title.Position.Y,TestUI.Delete.Title.Size.X,TestUI.Delete.Title.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			if #Data.Tests == 0 then
+				love.graphics.print("No Tests to Remove", ((TestUI.Delete.Title.Position.X+(TestUI.Delete.Title.Size.X/2))-love.graphics.getFont():getWidth("No Tests to Remove")/2), TestUI.Delete.Title.Position.Y+4);
+			else
+				love.graphics.print(tostring(Data.Tests[TestUI.Delete.Number].Name), ((TestUI.Delete.Title.Position.X+(TestUI.Delete.Title.Size.X/2))-love.graphics.getFont():getWidth(tostring(Data.Tests[TestUI.Delete.Number].Name))/2), TestUI.Delete.Title.Position.Y+4);
+			end
+			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.Delete.Next) then
+				love.graphics.setColor( 159,82,31,255/2 )
+			else
+				love.graphics.setColor( 159,82,31,255/4 )
+			end
+			love.graphics.rectangle("fill",TestUI.Delete.Next.Position.X,TestUI.Delete.Next.Position.Y,TestUI.Delete.Next.Size.X,TestUI.Delete.Next.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.Delete.Next.Text, ((TestUI.Delete.Next.Position.X+(TestUI.Delete.Next.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Delete.Next.Text)/2), TestUI.Delete.Next.Position.Y+4);
+			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.Delete.Previous) then
+				love.graphics.setColor( 159,82,31,255/2 )
+			else
+				love.graphics.setColor( 159,82,31,255/4 )
+			end
+			love.graphics.rectangle("fill",TestUI.Delete.Previous.Position.X,TestUI.Delete.Previous.Position.Y,TestUI.Delete.Previous.Size.X,TestUI.Delete.Previous.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.Delete.Previous.Text, ((TestUI.Delete.Previous.Position.X+(TestUI.Delete.Previous.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Delete.Previous.Text)/2), TestUI.Delete.Previous.Position.Y+4);
 		end
 	end
 end

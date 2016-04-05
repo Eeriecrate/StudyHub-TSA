@@ -39,7 +39,7 @@ Toolbar.Tools.New.Size.Y = 20;
 Toolbar.Tools.New.Parent = Toolbar;
 Toolbar.Tools.New.Visible = true;
 Toolbar.Tools.New.Clicked = function()
-	if not require("TestUI").newTest.Details.Visible then
+	if not require("TestUI").newTest.Details.Visible and not require("TestUI").Delete.Visible then
 		require("TestUI").newTest.toggleVisiblity();
 	end
 end
@@ -77,7 +77,9 @@ Toolbar.Tools.Delete.Size.Y = 20;
 Toolbar.Tools.Delete.Parent = Toolbar;
 Toolbar.Tools.Delete.Visible = true;
 Toolbar.Tools.Delete.Clicked = function()
-	print("Placeholder");
+	if not require("TestUI").newTest.Visible then
+		require("TestUI").Delete.Visible = not(require("TestUI").Delete.Visible);
+	end
 end
 
 function Toolbar.updatePositions()
