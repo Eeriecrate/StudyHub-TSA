@@ -222,6 +222,11 @@ function love.draw()
 			love.graphics.rectangle("fill",TestUI.Test.Frame.Position.X-3,TestUI.Test.Frame.Position.Y-3,TestUI.Test.Frame.Size.X+6,TestUI.Test.Frame.Size.Y+6);
 			love.graphics.setColor( 255,127,39,225);
 			love.graphics.rectangle("fill",TestUI.Test.Frame.Position.X,TestUI.Test.Frame.Position.Y,TestUI.Test.Frame.Size.X,TestUI.Test.Frame.Size.Y);
+			love.graphics.setColor( 159,82,31,255/4 );
+			love.graphics.rectangle("fill",TestUI.Test.A.Position.X,TestUI.Test.A.Position.Y,TestUI.Test.A.Size.X,TestUI.Test.A.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.takeTest.Next.Text, ((TestUI.Test.A.Position.X+(TestUI.Test.A.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Test.A.Text)/2), TestUI.Test.A.Position.Y+4);
+
 		else
 			love.graphics.setColor(255,255,255,255/2)
 			love.graphics.draw(Logo,(love.graphics.getWidth()/2-(429/2)),(love.graphics.getHeight()*.33-(332/2)),0,1,1)
