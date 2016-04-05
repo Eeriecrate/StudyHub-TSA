@@ -39,28 +39,33 @@ Toolbar.Tools.New.Size.Y = 20;
 Toolbar.Tools.New.Parent = Toolbar;
 Toolbar.Tools.New.Visible = true;
 Toolbar.Tools.New.Clicked = function()
-	if not require("TestUI").newTest.Details.Visible and not require("TestUI").Delete.Visible then
+	if not require("TestUI").newTest.Details.Visible and not require("TestUI").Delete.Visible and not require("TestUI").takeTest.Visible and not require("TestUI").Test.Visible then
 		require("TestUI").newTest.toggleVisiblity();
 	end
 end
 
-Toolbar.Tools.Edit = {};
-table.insert(require("MouseFunctions").Available,Toolbar.Tools.Edit);
-Toolbar.Tools.Edit.Scale = {};
-Toolbar.Tools.Edit.Text = "Test";
-Toolbar.Tools.Edit.Scale.X = 1;
-Toolbar.Tools.Edit.Scale.Y = 1;
-Toolbar.Tools.Edit.Position = {};
-Toolbar.Tools.Edit.Position.X = 85;
-Toolbar.Tools.Edit.Position.Y = 2;
-Toolbar.Tools.Edit.Size = {};
-Toolbar.Tools.Edit.Size.X = 75;
-Toolbar.Tools.Edit.Size.Y = 20; 
-Toolbar.Tools.Edit.Parent = Toolbar;
-Toolbar.Tools.Edit.Visible = true;
-Toolbar.Tools.Edit.Clicked = function()
-	print("Placeholder");
+Toolbar.Tools.Test = {};
+table.insert(require("MouseFunctions").Available,Toolbar.Tools.Test);
+Toolbar.Tools.Test.Scale = {};
+Toolbar.Tools.Test.Text = "Test";
+Toolbar.Tools.Test.Scale.X = 1;
+Toolbar.Tools.Test.Scale.Y = 1;
+Toolbar.Tools.Test.Position = {};
+Toolbar.Tools.Test.Position.X = 85;
+Toolbar.Tools.Test.Position.Y = 2;
+Toolbar.Tools.Test.Size = {};
+Toolbar.Tools.Test.Size.X = 75;
+Toolbar.Tools.Test.Size.Y = 20; 
+Toolbar.Tools.Test.Parent = Toolbar;
+Toolbar.Tools.Test.Visible = true;
+Toolbar.Tools.Test.Clicked = function()
+	if not require("TestUI").newTest.Visible and not require("TestUI").Delete.Visible  and not require("TestUI").Test.Visible then
+		require("TestUI").takeTest.Visible = not(require("TestUI").takeTest.Visible);
+		require("TestUI").takeTest.Number = 1;
+	end
 end
+
+
 
 Toolbar.Tools.Delete = {};
 table.insert(require("MouseFunctions").Available,Toolbar.Tools.Delete);
@@ -77,8 +82,9 @@ Toolbar.Tools.Delete.Size.Y = 20;
 Toolbar.Tools.Delete.Parent = Toolbar;
 Toolbar.Tools.Delete.Visible = true;
 Toolbar.Tools.Delete.Clicked = function()
-	if not require("TestUI").newTest.Visible then
+	if not require("TestUI").newTest.Visible and not require("TestUI").takeTest.Visible and not require("TestUI").Test.Visible then
 		require("TestUI").Delete.Visible = not(require("TestUI").Delete.Visible);
+		require("TestUI").Delete.Number = 1;
 	end
 end
 

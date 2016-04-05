@@ -248,7 +248,6 @@ TU.Delete.Next.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Next.Size.
 TU.Delete.Next.Text = ">"
 table.insert(require("MouseFunctions").Available,TU.Delete.Next);
 function TU.Delete.Next.Clicked()
-	print(TU.Delete.Number.." "..#(require("Data").Tests))
 	if #(require("Data").Tests) > 1 then
 		if TU.Delete.Number == #(require("Data").Tests) then
 			TU.Delete.Number = 1;
@@ -269,7 +268,7 @@ TU.Delete.Previous.Scale.Y = 1;
 TU.Delete.Previous.Position = {};
 TU.Delete.Previous.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Previous.Size.X/2)-87);
 TU.Delete.Previous.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Previous.Size.Y/2)-10);
-TU.Delete.Previous.Text = ">"
+TU.Delete.Previous.Text = "<"
 table.insert(require("MouseFunctions").Available,TU.Delete.Previous);
 function TU.Delete.Previous.Clicked()
 	if #(require("Data").Tests) > 1 then
@@ -280,19 +279,258 @@ function TU.Delete.Previous.Clicked()
 		end
 	end
 end
+TU.Delete.Confirm = {};
+TU.Delete.Confirm.Visible = true;
+TU.Delete.Confirm.Parent = TU.Delete;
+TU.Delete.Confirm.Size = {};
+TU.Delete.Confirm.Size.X = 100;
+TU.Delete.Confirm.Size.Y = 20;
+TU.Delete.Confirm.Scale = {};
+TU.Delete.Confirm.Scale.X = 1;
+TU.Delete.Confirm.Scale.Y = 1;
+TU.Delete.Confirm.Position = {};
+TU.Delete.Confirm.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Confirm.Size.X/2));
+TU.Delete.Confirm.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Confirm.Size.Y/2)+12.5);
+TU.Delete.Confirm.Text = "Delete";
+table.insert(require("MouseFunctions").Available,TU.Delete.Confirm);
+function TU.Delete.Confirm.Clicked()
+	if #(require("Data").Tests) >= 1 then
+		table.remove(require("Data").Tests,TU.Delete.Number);
+		require("Data").saveTests();
+		if TU.Delete.Number == 1 then
+			TU.Delete.Number = #(require("Data").Tests);
+		else
+			TU.Delete.Number = TU.Delete.Number - 1;
+		end
+		if TU.Delete.Number == 0 then
+			TU.Delete.Number = 1;
+		end
+	end
+end
+
+TU.takeTest = {};
+TU.takeTest.Number = 1;
+TU.takeTest.Visible = false;
+TU.takeTest.Frame = {};
+TU.takeTest.Frame.Visible = true;
+TU.takeTest.Frame.Parent = TU.takeTest;
+TU.takeTest.Frame.Size = {};
+TU.takeTest.Frame.Size.X = 200;
+TU.takeTest.Frame.Size.Y = 50;
+TU.takeTest.Frame.Scale = {};
+TU.takeTest.Frame.Scale.X = 1;
+TU.takeTest.Frame.Scale.Y = 1;
+TU.takeTest.Frame.Position = {};
+TU.takeTest.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Frame.Size.X/2));
+TU.takeTest.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Frame.Size.Y/2));
+TU.takeTest.Title = {};
+TU.takeTest.Title.Visible = true;
+TU.takeTest.Title.Parent = TU.takeTest;
+TU.takeTest.Title.Size = {};
+TU.takeTest.Title.Size.X = 150;
+TU.takeTest.Title.Size.Y = 20;
+TU.takeTest.Title.Scale = {};
+TU.takeTest.Title.Scale.X = 1;
+TU.takeTest.Title.Scale.Y = 1;
+TU.takeTest.Title.Position = {};
+TU.takeTest.Title.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Title.Size.X/2));
+TU.takeTest.Title.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Title.Size.Y/2)-10);
+TU.takeTest.Next = {};
+TU.takeTest.Next.Visible = true;
+TU.takeTest.Next.Parent = TU.takeTest;
+TU.takeTest.Next.Size = {};
+TU.takeTest.Next.Size.X = 20;
+TU.takeTest.Next.Size.Y = 20;
+TU.takeTest.Next.Scale = {};
+TU.takeTest.Next.Scale.X = 1;
+TU.takeTest.Next.Scale.Y = 1;
+TU.takeTest.Next.Position = {};
+TU.takeTest.Next.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Next.Size.X/2)+87);
+TU.takeTest.Next.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Next.Size.Y/2)-10);
+TU.takeTest.Next.Text = ">"
+table.insert(require("MouseFunctions").Available,TU.takeTest.Next);
+function TU.takeTest.Next.Clicked()
+	if #(require("Data").Tests) > 1 then
+		if TU.takeTest.Number == #(require("Data").Tests) then
+			TU.takeTest.Number = 1;
+		else
+			TU.takeTest.Number = TU.takeTest.Number + 1;
+		end
+	end
+end
+TU.takeTest.Previous = {};
+TU.takeTest.Previous.Visible = true;
+TU.takeTest.Previous.Parent = TU.takeTest;
+TU.takeTest.Previous.Size = {};
+TU.takeTest.Previous.Size.X = 20;
+TU.takeTest.Previous.Size.Y = 20;
+TU.takeTest.Previous.Scale = {};
+TU.takeTest.Previous.Scale.X = 1;
+TU.takeTest.Previous.Scale.Y = 1;
+TU.takeTest.Previous.Position = {};
+TU.takeTest.Previous.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Previous.Size.X/2)-87);
+TU.takeTest.Previous.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Previous.Size.Y/2)-10);
+TU.takeTest.Previous.Text = "<"
+table.insert(require("MouseFunctions").Available,TU.takeTest.Previous);
+function TU.takeTest.Previous.Clicked()
+	if #(require("Data").Tests) > 1 then
+		if TU.takeTest.Number == 1 then
+			TU.takeTest.Number = #(require("Data").Tests);
+		else
+			TU.takeTest.Number = TU.takeTest.Number - 1;
+		end
+	end
+end
+TU.takeTest.Confirm = {};
+TU.takeTest.Confirm.Visible = true;
+TU.takeTest.Confirm.Parent = TU.takeTest;
+TU.takeTest.Confirm.Size = {};
+TU.takeTest.Confirm.Size.X = 100;
+TU.takeTest.Confirm.Size.Y = 20;
+TU.takeTest.Confirm.Scale = {};
+TU.takeTest.Confirm.Scale.X = 1;
+TU.takeTest.Confirm.Scale.Y = 1;
+TU.takeTest.Confirm.Position = {};
+TU.takeTest.Confirm.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Confirm.Size.X/2));
+TU.takeTest.Confirm.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Confirm.Size.Y/2)+12.5);
+TU.takeTest.Confirm.Text = "Take";
+table.insert(require("MouseFunctions").Available,TU.takeTest.Confirm);
+function TU.takeTest.Confirm.Clicked()
+	TU.takeTest.Visible = false;
+	TU.Test.Visible = true;
+end
+
+TU.Test = {};
+TU.Test.Visible = true;
+TU.Test.Number = 1;
+TU.Test.Visible = false;
+TU.Test.Frame = {};
+TU.Test.Frame.Visible = true;
+TU.Test.Frame.Parent = TU.Test;
+TU.Test.Frame.Size = {};
+TU.Test.Frame.Size.X = 760;
+TU.Test.Frame.Size.Y = 560;
+TU.Test.Frame.Scale = {};
+TU.Test.Frame.Scale.X = 1;
+TU.Test.Frame.Scale.Y = 1;
+TU.Test.Frame.Position = {};
+TU.Test.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.Frame.Size.X/2));
+TU.Test.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.Frame.Size.Y/2));
+TU.Test.Question = {};
+TU.Test.A = {};
+TU.Test.A.Visible = true;
+TU.Test.A.Parent = TU.Test;
+TU.Test.A.Size = {};
+TU.Test.A.Size.X = 700;
+TU.Test.A.Size.Y = 20;
+TU.Test.A.Scale = {};
+TU.Test.A.Scale.X = 1;
+TU.Test.A.Scale.Y = 1;
+TU.Test.A.Position = {};
+TU.Test.A.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.A.Size.X/2));
+TU.Test.A.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.A.Size.Y/2));
+TU.Test.A.Text = "";
+TU.Test.B = {};
+TU.Test.B.Visible = true;
+TU.Test.B.Parent = TU.Test;
+TU.Test.B.Size = {};
+TU.Test.B.Size.X = 700;
+TU.Test.B.Size.Y = 20;
+TU.Test.B.Scale = {};
+TU.Test.B.Scale.X = 1;
+TU.Test.B.Scale.Y = 1;
+TU.Test.B.Position = {};
+TU.Test.B.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.B.Size.X/2));
+TU.Test.B.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.B.Size.Y/2));
+TU.Test.B.Text = "";
+TU.Test.C = {};
+TU.Test.C.Visible = true;
+TU.Test.C.Parent = TU.Test;
+TU.Test.C.Size = {};
+TU.Test.C.Size.X = 700;
+TU.Test.C.Size.Y = 20;
+TU.Test.C.Scale = {};
+TU.Test.C.Scale.X = 1;
+TU.Test.C.Scale.Y = 1;
+TU.Test.C.Position = {};
+TU.Test.C.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.C.Size.X/2));
+TU.Test.C.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.C.Size.Y/2));
+TU.Test.C.Text = "";
+TU.Test.D = {};
+TU.Test.D.Visible = true;
+TU.Test.D.Parent = TU.Test;
+TU.Test.D.Size = {};
+TU.Test.D.Size.X = 700;
+TU.Test.D.Size.Y = 20;
+TU.Test.D.Scale = {};
+TU.Test.D.Scale.X = 1;
+TU.Test.D.Scale.Y = 1;
+TU.Test.D.Position = {};
+TU.Test.D.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.D.Size.X/2));
+TU.Test.D.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.D.Size.Y/2));
+TU.Test.D.Text = "";
+
+TU.usedQuestions = {};
+TU.availableQuestions = {};
+TU.localAnswers = {};
+TU.currentQuestion = nil;
+TU.availableAnswers = {};
+
+function TU.resetAvailable(test)
+	TU.localTake = {};
+	for i,v in pairs(require("Data").Tests[test]) do
+		table.insert(TU.localTake,v);
+	end
+	TU.availableQuestions = {};
+	for i = 1,#TU.localTake,1 do
+		local Number = math.random(1,#TU.localTake);
+		table.insert(TU.availableQuestions,TU.localTake[Number]);
+		table.remove(TU.localTake,Number);
+	end
+end
+
+function TU.setQuestion()
+	local newNumber = math.random(1,#TU.availableQuestions);
+	table.insert(TU.usedQuestions,TU.availableQuestions[newNumber]);
+	TU.currentQuestion = TU.availableQuestions[newNumber];
+	table.remove(TU.availableQuestions,newNumber);
+end
+
+function TU.generateAnswers()
+	TU.availableAnswers = {};
+	TU.localAnswers = {};
+	table.insert(TU.localAnswers,TU.currentQuestion.A);
+	for i = 1,3,1 do
+		local picked = nil;
+		while true do
+			picked = require("Data").Tests[math.random(1,#(require("Data").Tests))];
+			if picked.A ~= TU.currentQuestion.A then
+				break;
+			end
+		end 
+		table.insert(TU.localAnswers,picked);
+	end
+	for i = 1,#TU.localAnswers,1 do
+		local Number = math.random(1,#TU.localAnswers);
+		table.insert(TU.availableAnswers,TU.localAnswers[Number]);
+		table.remove(TU.localAnswers,Number);
+	end
+	local List = {TU.Test.A,TU.Test.B,TU.Test.C,TU.Test.D};
+	Th
+end
+
 
 
 --[[Not sure why I only made this for one peice of the code, I had a different method in mind at this point.]]--
 --[[It would be nice to consider converting this to my newer method using a parent property]]--
 function TU.newTest.toggleVisiblity()
-	--[[I guess using the operator should probably save it from having to use logic.]]--
+	--[[I used the operator should probably save it from having to use logic.]]--
 	TU.newTest.Visible = not TU.newTest.Visible;
 	TU.newTest.Title.Visible = TU.newTest.Visible;
 	TU.newTest.TitleInput.Visible = TU.newTest.Visible;
 	TU.newTest.Confirm.Visible = TU.newTest.Visible;
 	TU.newTest.Cancel.Visible = TU.newTest.Visible;
 end
-
 
 --[[This is such a terrible way to do this, but I'm in a rush to get this done after completely redoing it.]]--
 --[[Consider redoing this part?]]--
@@ -329,6 +567,20 @@ function TU.updatePositions()
 	TU.Delete.Next.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Next.Size.Y/2)-10);
 	TU.Delete.Previous.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Previous.Size.X/2)-87);
 	TU.Delete.Previous.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Previous.Size.Y/2)-10);
+	TU.Delete.Confirm.Position.X = ((love.graphics.getWidth()/2)-(TU.Delete.Confirm.Size.X/2));
+	TU.Delete.Confirm.Position.Y = ((love.graphics.getHeight()/2)-(TU.Delete.Confirm.Size.Y/2)+12.5);
+	TU.takeTest.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Frame.Size.X/2));
+	TU.takeTest.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Frame.Size.Y/2));
+	TU.takeTest.Title.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Title.Size.X/2));
+	TU.takeTest.Title.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Title.Size.Y/2)-10);
+	TU.takeTest.Next.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Next.Size.X/2)+87);
+	TU.takeTest.Next.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Next.Size.Y/2)-10);
+	TU.takeTest.Previous.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Previous.Size.X/2)-87);
+	TU.takeTest.Previous.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Previous.Size.Y/2)-10);
+	TU.takeTest.Confirm.Position.X = ((love.graphics.getWidth()/2)-(TU.takeTest.Confirm.Size.X/2));
+	TU.takeTest.Confirm.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Confirm.Size.Y/2)+12.5);
+	TU.Test.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.Frame.Size.X/2));
+	TU.Test.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.Frame.Size.Y/2));
 end
 
 

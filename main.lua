@@ -8,6 +8,7 @@ function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest")
 	Data = require("Data");
 	Tests = JSON.decode(Data.loadTests());
+	Logo = love.graphics.newImage("Art/Logo.png");
 	if #Tests ~= 0 then
 		for i,v in pairs(Tests) do
 			table.insert(require("Data").Tests,v);
@@ -148,24 +149,78 @@ function love.draw()
 			if #Data.Tests == 0 then
 				love.graphics.print("No Tests to Remove", ((TestUI.Delete.Title.Position.X+(TestUI.Delete.Title.Size.X/2))-love.graphics.getFont():getWidth("No Tests to Remove")/2), TestUI.Delete.Title.Position.Y+4);
 			else
-				love.graphics.print(tostring(Data.Tests[TestUI.Delete.Number].Name), ((TestUI.Delete.Title.Position.X+(TestUI.Delete.Title.Size.X/2))-love.graphics.getFont():getWidth(tostring(Data.Tests[TestUI.Delete.Number].Name))/2), TestUI.Delete.Title.Position.Y+4);
+				pcall(function() love.graphics.print(tostring(Data.Tests[TestUI.Delete.Number].Name), ((TestUI.Delete.Title.Position.X+(TestUI.Delete.Title.Size.X/2))-love.graphics.getFont():getWidth(tostring(Data.Tests[TestUI.Delete.Number].Name))/2), TestUI.Delete.Title.Position.Y+4) end);
 			end
 			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.Delete.Next) then
-				love.graphics.setColor( 159,82,31,255/2 )
+				love.graphics.setColor( 159,82,31,255/2 );
 			else
-				love.graphics.setColor( 159,82,31,255/4 )
+				love.graphics.setColor( 159,82,31,255/4 );
 			end
 			love.graphics.rectangle("fill",TestUI.Delete.Next.Position.X,TestUI.Delete.Next.Position.Y,TestUI.Delete.Next.Size.X,TestUI.Delete.Next.Size.Y);
 			love.graphics.setColor( 0,0,0,225)
 			love.graphics.print(TestUI.Delete.Next.Text, ((TestUI.Delete.Next.Position.X+(TestUI.Delete.Next.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Delete.Next.Text)/2), TestUI.Delete.Next.Position.Y+4);
 			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.Delete.Previous) then
-				love.graphics.setColor( 159,82,31,255/2 )
+				love.graphics.setColor( 159,82,31,255/2 );
 			else
-				love.graphics.setColor( 159,82,31,255/4 )
+				love.graphics.setColor( 159,82,31,255/4 );
 			end
 			love.graphics.rectangle("fill",TestUI.Delete.Previous.Position.X,TestUI.Delete.Previous.Position.Y,TestUI.Delete.Previous.Size.X,TestUI.Delete.Previous.Size.Y);
-			love.graphics.setColor( 0,0,0,225)
+			love.graphics.setColor( 0,0,0,225);
 			love.graphics.print(TestUI.Delete.Previous.Text, ((TestUI.Delete.Previous.Position.X+(TestUI.Delete.Previous.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Delete.Previous.Text)/2), TestUI.Delete.Previous.Position.Y+4);
+			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.Delete.Confirm) then
+				love.graphics.setColor( 159,82,31,255/2 );
+			else
+				love.graphics.setColor( 159,82,31,255/4 );
+			end
+			love.graphics.rectangle("fill",TestUI.Delete.Confirm.Position.X,TestUI.Delete.Confirm.Position.Y,TestUI.Delete.Confirm.Size.X,TestUI.Delete.Confirm.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.Delete.Confirm.Text, ((TestUI.Delete.Confirm.Position.X+(TestUI.Delete.Confirm.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Delete.Confirm.Text)/2), TestUI.Delete.Confirm.Position.Y+4);
+
+
+			elseif TestUI.takeTest.Visible then
+			love.graphics.setColor( 255/1.5,127/1.5,39/1.5,225);
+			love.graphics.rectangle("fill",TestUI.takeTest.Frame.Position.X,
+				TestUI.takeTest.Frame.Position.Y+2,
+				TestUI.takeTest.Frame.Size.X,
+				TestUI.takeTest.Frame.Size.Y);
+			love.graphics.setColor( 255,127,39,225);
+			love.graphics.rectangle("fill",TestUI.takeTest.Frame.Position.X,TestUI.takeTest.Frame.Position.Y,TestUI.takeTest.Frame.Size.X,TestUI.takeTest.Frame.Size.Y);
+			love.graphics.setColor( 159,82,31,255/4 );
+			love.graphics.rectangle("fill",TestUI.takeTest.Title.Position.X,TestUI.takeTest.Title.Position.Y,TestUI.takeTest.Title.Size.X,TestUI.takeTest.Title.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			if #Data.Tests == 0 then
+				love.graphics.print("No Tests to attempt", ((TestUI.takeTest.Title.Position.X+(TestUI.takeTest.Title.Size.X/2))-love.graphics.getFont():getWidth("No Tests to Remove")/2), TestUI.takeTest.Title.Position.Y+4);
+			else
+				pcall(function() love.graphics.print(tostring(Data.Tests[TestUI.takeTest.Number].Name), ((TestUI.takeTest.Title.Position.X+(TestUI.takeTest.Title.Size.X/2))-love.graphics.getFont():getWidth(tostring(Data.Tests[TestUI.takeTest.Number].Name))/2), TestUI.takeTest.Title.Position.Y+4) end);
+			end
+			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.takeTest.Next) then
+				love.graphics.setColor( 159,82,31,255/2 );
+			else
+				love.graphics.setColor( 159,82,31,255/4 );
+			end
+			love.graphics.rectangle("fill",TestUI.takeTest.Next.Position.X,TestUI.takeTest.Next.Position.Y,TestUI.takeTest.Next.Size.X,TestUI.takeTest.Next.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.takeTest.Next.Text, ((TestUI.takeTest.Next.Position.X+(TestUI.takeTest.Next.Size.X/2))-love.graphics.getFont():getWidth(TestUI.takeTest.Next.Text)/2), TestUI.takeTest.Next.Position.Y+4);
+			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.takeTest.Previous) then
+				love.graphics.setColor( 159,82,31,255/2 );
+			else
+				love.graphics.setColor( 159,82,31,255/4 );
+			end
+			love.graphics.rectangle("fill",TestUI.takeTest.Previous.Position.X,TestUI.takeTest.Previous.Position.Y,TestUI.takeTest.Previous.Size.X,TestUI.takeTest.Previous.Size.Y);
+			love.graphics.setColor( 0,0,0,225);
+			love.graphics.print(TestUI.takeTest.Previous.Text, ((TestUI.takeTest.Previous.Position.X+(TestUI.takeTest.Previous.Size.X/2))-love.graphics.getFont():getWidth(TestUI.takeTest.Previous.Text)/2), TestUI.takeTest.Previous.Position.Y+4);
+			if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.takeTest.Confirm) then
+				love.graphics.setColor( 159,82,31,255/2 );
+			else
+				love.graphics.setColor( 159,82,31,255/4 );
+			end
+			love.graphics.rectangle("fill",TestUI.takeTest.Confirm.Position.X,TestUI.takeTest.Confirm.Position.Y,TestUI.takeTest.Confirm.Size.X,TestUI.takeTest.Confirm.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.takeTest.Confirm.Text, ((TestUI.takeTest.Confirm.Position.X+(TestUI.takeTest.Confirm.Size.X/2))-love.graphics.getFont():getWidth(TestUI.takeTest.Confirm.Text)/2), TestUI.takeTest.Confirm.Position.Y+4);				
+			else
+			love.graphics.setColor(255,255,255,255/2)
+			love.graphics.draw(Logo,(love.graphics.getWidth()/2-(429/2)),(love.graphics.getHeight()*.33-(332/2)),0,1,1)
+
 		end
 	end
 end
