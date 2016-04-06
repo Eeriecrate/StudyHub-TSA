@@ -396,12 +396,14 @@ TU.takeTest.Confirm.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Con
 TU.takeTest.Confirm.Text = "Take";
 table.insert(require("MouseFunctions").Available,TU.takeTest.Confirm);
 function TU.takeTest.Confirm.Clicked()
-	TU.Test.Number = TU.takeTest.Number;
-	TU.takeTest.Visible = false;
-	TU.resetAvailable(TU.takeTest.Number);
-	TU.setQuestion();
-	TU.generateAnswers();
-	TU.Test.Visible = true;
+	if #(require("Data").Tests) ~= 0 then
+		TU.Test.Number = TU.takeTest.Number;
+		TU.takeTest.Visible = false;
+		TU.resetAvailable(TU.takeTest.Number);
+		TU.setQuestion();
+		TU.generateAnswers();
+		TU.Test.Visible = true;
+	end
 end
 
 TU.Test = {};
@@ -521,6 +523,25 @@ TU.Results.Frame.Position = {};
 TU.Results.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Results.Frame.Size.X/2));
 TU.Results.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Results.Frame.Size.Y/2));
 TU.Results.Frame.Text = "Test completed: (PERCENT) correct.";
+
+
+TU.ConfirmEnd = {};
+TU.ConfirmEnd.Visible = true;
+TU.ConfirmEnd.Parent = TU.Results;
+TU.ConfirmEnd.Size = {};
+TU.ConfirmEnd.Size.X = 150;
+TU.ConfirmEnd.Size.Y = 20;
+TU.ConfirmEnd.Scale = {};
+TU.ConfirmEnd.Scale.X = 1;
+TU.ConfirmEnd.Scale.Y = 1;
+TU.ConfirmEnd.Position = {};
+TU.ConfirmEnd.Position.X = ((love.graphics.getWidth()/2)-(TU.ConfirmEnd.Size.X/2));
+TU.ConfirmEnd.Position.Y = ((love.graphics.getHeight()/2)-(TU.ConfirmEnd.Size.Y/2)+40);
+TU.ConfirmEnd.Text = "Close Results";
+table.insert(require("MouseFunctions").Available,TU.ConfirmEnd)
+function TU.ConfirmEnd.Clicked()
+	TU.Results.Visible = false;
+end
 
 TU.usedQuestions = {};
 TU.availableQuestions = {};
@@ -685,6 +706,10 @@ function TU.updatePositions()
 	TU.Test.C.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.C.Size.Y/2))+110;
 	TU.Test.D.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.D.Size.X/2));
 	TU.Test.D.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.D.Size.Y/2))+140;
+	TU.Results.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Results.Frame.Size.X/2));
+	TU.Results.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Results.Frame.Size.Y/2));
+	TU.ConfirmEnd.Position.X = ((love.graphics.getWidth()/2)-(TU.ConfirmEnd.Size.X/2));
+	TU.ConfirmEnd.Position.Y = ((love.graphics.getHeight()/2)-(TU.ConfirmEnd.Size.Y/2)+40);
 end
 
 

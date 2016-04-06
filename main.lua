@@ -254,7 +254,14 @@ function love.draw()
 		love.graphics.rectangle("fill",TestUI.Results.Frame.Position.X,TestUI.Results.Frame.Position.Y,TestUI.Results.Frame.Size.X,TestUI.Results.Frame.Size.Y);
 		love.graphics.setColor( 0,0,0,225)
 		love.graphics.print(TestUI.Results.Frame.Text, ((TestUI.Results.Frame.Position.X+(TestUI.Results.Frame.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Results.Frame.Text)/2), TestUI.Results.Frame.Position.Y+2);
-
+		if Mouse.isHoveringOver(Mouse.X,Mouse.Y,TestUI.ConfirmEnd) then
+				love.graphics.setColor( 159,82,31,255/2 );
+			else
+				love.graphics.setColor( 159,82,31,255/4 );
+			end
+			love.graphics.rectangle("fill",TestUI.ConfirmEnd.Position.X,TestUI.ConfirmEnd.Position.Y,TestUI.ConfirmEnd.Size.X,TestUI.ConfirmEnd.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.ConfirmEnd.Text, ((TestUI.ConfirmEnd.Position.X+(TestUI.ConfirmEnd.Size.X/2))-love.graphics.getFont():getWidth(TestUI.ConfirmEnd.Text)/2), TestUI.ConfirmEnd.Position.Y+4);
 		else
 			love.graphics.setColor(255,255,255,255/2)
 			love.graphics.draw(Logo,(love.graphics.getWidth()/2-(429/2)),(love.graphics.getHeight()*.33-(332/2)),0,1,1)
