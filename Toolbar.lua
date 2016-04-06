@@ -39,7 +39,7 @@ Toolbar.Tools.New.Size.Y = 20;
 Toolbar.Tools.New.Parent = Toolbar;
 Toolbar.Tools.New.Visible = true;
 Toolbar.Tools.New.Clicked = function()
-	if not require("TestUI").newTest.Details.Visible and not require("TestUI").Delete.Visible and not require("TestUI").takeTest.Visible and not require("TestUI").Test.Visible then
+	if  not require("TestUI").Results.Visible and not require("TestUI").newTest.Details.Visible and not require("TestUI").Delete.Visible and not require("TestUI").takeTest.Visible and not require("TestUI").Test.Visible then
 		require("TestUI").newTest.toggleVisiblity();
 	end
 end
@@ -59,7 +59,7 @@ Toolbar.Tools.Test.Size.Y = 20;
 Toolbar.Tools.Test.Parent = Toolbar;
 Toolbar.Tools.Test.Visible = true;
 Toolbar.Tools.Test.Clicked = function()
-	if not require("TestUI").newTest.Visible and not require("TestUI").Delete.Visible  and not require("TestUI").Test.Visible then
+	if not require("TestUI").Results.Visible and not require("TestUI").newTest.Visible and not require("TestUI").Delete.Visible  and not require("TestUI").Test.Visible then
 		require("TestUI").takeTest.Visible = not(require("TestUI").takeTest.Visible);
 		require("TestUI").takeTest.Number = 1;
 	end
@@ -82,7 +82,7 @@ Toolbar.Tools.Delete.Size.Y = 20;
 Toolbar.Tools.Delete.Parent = Toolbar;
 Toolbar.Tools.Delete.Visible = true;
 Toolbar.Tools.Delete.Clicked = function()
-	if not require("TestUI").newTest.Visible and not require("TestUI").takeTest.Visible and not require("TestUI").Test.Visible then
+	if not require("TestUI").Results.Visible and not require("TestUI").newTest.Visible and not require("TestUI").takeTest.Visible and not require("TestUI").Test.Visible then
 		require("TestUI").Delete.Visible = not(require("TestUI").Delete.Visible);
 		require("TestUI").Delete.Number = 1;
 	end

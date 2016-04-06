@@ -396,11 +396,16 @@ TU.takeTest.Confirm.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Con
 TU.takeTest.Confirm.Text = "Take";
 table.insert(require("MouseFunctions").Available,TU.takeTest.Confirm);
 function TU.takeTest.Confirm.Clicked()
+	TU.Test.Number = TU.takeTest.Number;
 	TU.takeTest.Visible = false;
+	TU.resetAvailable(TU.takeTest.Number);
+	TU.setQuestion();
+	TU.generateAnswers();
 	TU.Test.Visible = true;
 end
 
 TU.Test = {};
+TU.Test.Counter = 0;
 TU.Test.Visible = true;
 TU.Test.Number = 1;
 TU.Test.Visible = false;
@@ -428,8 +433,12 @@ TU.Test.A.Scale.X = 1;
 TU.Test.A.Scale.Y = 1;
 TU.Test.A.Position = {};
 TU.Test.A.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.A.Size.X/2));
-TU.Test.A.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.A.Size.Y/2));
+TU.Test.A.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.A.Size.Y/2))+50;
 TU.Test.A.Text = "";
+table.insert(require("MouseFunctions").Available,TU.Test.A);
+function TU.Test.A.Clicked()
+	TU.checkAnswer(TU.Test.A.Text);
+end
 TU.Test.B = {};
 TU.Test.B.Visible = true;
 TU.Test.B.Parent = TU.Test;
@@ -441,8 +450,12 @@ TU.Test.B.Scale.X = 1;
 TU.Test.B.Scale.Y = 1;
 TU.Test.B.Position = {};
 TU.Test.B.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.B.Size.X/2));
-TU.Test.B.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.B.Size.Y/2));
+TU.Test.B.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.B.Size.Y/2))+80;
 TU.Test.B.Text = "";
+table.insert(require("MouseFunctions").Available,TU.Test.B);
+function TU.Test.B.Clicked()
+	TU.checkAnswer(TU.Test.B.Text);
+end
 TU.Test.C = {};
 TU.Test.C.Visible = true;
 TU.Test.C.Parent = TU.Test;
@@ -454,8 +467,12 @@ TU.Test.C.Scale.X = 1;
 TU.Test.C.Scale.Y = 1;
 TU.Test.C.Position = {};
 TU.Test.C.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.C.Size.X/2));
-TU.Test.C.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.C.Size.Y/2));
+TU.Test.C.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.C.Size.Y/2))+110;
 TU.Test.C.Text = "";
+table.insert(require("MouseFunctions").Available,TU.Test.C);
+function TU.Test.C.Clicked()
+	TU.checkAnswer(TU.Test.C.Text);
+end
 TU.Test.D = {};
 TU.Test.D.Visible = true;
 TU.Test.D.Parent = TU.Test;
@@ -467,18 +484,56 @@ TU.Test.D.Scale.X = 1;
 TU.Test.D.Scale.Y = 1;
 TU.Test.D.Position = {};
 TU.Test.D.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.D.Size.X/2));
-TU.Test.D.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.D.Size.Y/2));
+TU.Test.D.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.D.Size.Y/2))+140;
 TU.Test.D.Text = "";
+table.insert(require("MouseFunctions").Available,TU.Test.D);
+function TU.Test.D.Clicked()
+	TU.checkAnswer(TU.Test.D.Text);
+end
+
+TU.Test.Question = {};
+TU.Test.Question.Visible = true;
+TU.Test.Question.Parent = TU.Test;
+TU.Test.Question.Size = {};
+TU.Test.Question.Size.X = 700;
+TU.Test.Question.Size.Y = 200;
+TU.Test.Question.Scale = {};
+TU.Test.Question.Scale.X = 1;
+TU.Test.Question.Scale.Y = 1;
+TU.Test.Question.Position = {};
+TU.Test.Question.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.Question.Size.X/2));
+TU.Test.Question.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.Question.Size.Y/2))-100;
+TU.Test.Question.Text = "";
+
+
+TU.Results = {};
+TU.Results.Visible = false;
+TU.Results.Frame = {};
+TU.Results.Frame.Visible = true;
+TU.Results.Frame.Parent = TU.Results;
+TU.Results.Frame.Size = {};
+TU.Results.Frame.Size.X = 300;
+TU.Results.Frame.Size.Y = 20;
+TU.Results.Frame.Scale = {};
+TU.Results.Frame.Scale.X = 1;
+TU.Results.Frame.Scale.Y = 1;
+TU.Results.Frame.Position = {};
+TU.Results.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Results.Frame.Size.X/2));
+TU.Results.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Results.Frame.Size.Y/2));
+TU.Results.Frame.Text = "Test completed: (PERCENT) correct.";
 
 TU.usedQuestions = {};
 TU.availableQuestions = {};
 TU.localAnswers = {};
 TU.currentQuestion = nil;
 TU.availableAnswers = {};
-
+TU.correct = 0;
+TU.incorrect = 0;
+math.randomseed(os.time());
 function TU.resetAvailable(test)
+	print(test)
 	TU.localTake = {};
-	for i,v in pairs(require("Data").Tests[test]) do
+	for i,v in pairs(require("Data").Tests[test].Questions) do
 		table.insert(TU.localTake,v);
 	end
 	TU.availableQuestions = {};
@@ -493,22 +548,35 @@ function TU.setQuestion()
 	local newNumber = math.random(1,#TU.availableQuestions);
 	table.insert(TU.usedQuestions,TU.availableQuestions[newNumber]);
 	TU.currentQuestion = TU.availableQuestions[newNumber];
+	TU.displayQuestion(TU.availableQuestions[newNumber].Q)
 	table.remove(TU.availableQuestions,newNumber);
+end
+
+function TU.displayQuestion(question)
+	TU.Test.Question.Text = question;
 end
 
 function TU.generateAnswers()
 	TU.availableAnswers = {};
 	TU.localAnswers = {};
+	TU.notInUse = {};
+	print("Current: "..TU.Test.Number)
+	for i,v in pairs(require("Data").Tests[TU.Test.Number].Questions) do
+		if v.A ~= TU.currentQuestion.A then
+			table.insert(TU.notInUse,v);
+		end
+	end
 	table.insert(TU.localAnswers,TU.currentQuestion.A);
 	for i = 1,3,1 do
 		local picked = nil;
-		while true do
-			picked = require("Data").Tests[math.random(1,#(require("Data").Tests))];
-			if picked.A ~= TU.currentQuestion.A then
-				break;
-			end
-		end 
-		table.insert(TU.localAnswers,picked);
+		local Go = false;
+		local Num = 0;
+		repeat
+		Num = math.random(1,#(TU.notInUse))
+		picked = TU.notInUse[Num];
+		until picked ~= nil
+		table.remove(TU.notInUse,Num);
+		table.insert(TU.localAnswers,picked.A);
 	end
 	for i = 1,#TU.localAnswers,1 do
 		local Number = math.random(1,#TU.localAnswers);
@@ -523,6 +591,25 @@ function TU.generateAnswers()
 	end
 end
 
+function TU.checkAnswer(what)
+	print(TU.Test.Counter)
+	if TU.Test.Counter <= 0 then
+		TU.Test.Counter = 60;
+		if what == TU.currentQuestion.A then
+			TU.correct = TU.correct + 1;
+		else
+			TU.incorrect = TU.incorrect + 1;
+		end
+		if #TU.availableQuestions == 0 then
+			TU.Test.Visible = false;
+			TU.Results.Visible = true;
+			TU.Results.Frame.Text = "Test completed: "..((TU.correct/(TU.correct+TU.incorrect))*100).."%";
+		else
+		TU.setQuestion();
+		TU.generateAnswers();
+		end
+	end
+end
 
 
 
@@ -586,6 +673,18 @@ function TU.updatePositions()
 	TU.takeTest.Confirm.Position.Y = ((love.graphics.getHeight()/2)-(TU.takeTest.Confirm.Size.Y/2)+12.5);
 	TU.Test.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.Frame.Size.X/2));
 	TU.Test.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.Frame.Size.Y/2));
+	TU.Test.Question.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.Question.Size.X/2));
+	TU.Test.Question.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.Question.Size.Y/2))-100;
+	TU.Test.Frame.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.Frame.Size.X/2));
+	TU.Test.Frame.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.Frame.Size.Y/2));
+	TU.Test.A.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.A.Size.X/2));
+	TU.Test.A.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.A.Size.Y/2))+50;
+	TU.Test.B.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.B.Size.X/2));
+	TU.Test.B.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.B.Size.Y/2))+80;
+	TU.Test.C.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.C.Size.X/2));
+	TU.Test.C.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.C.Size.Y/2))+110;
+	TU.Test.D.Position.X = ((love.graphics.getWidth()/2)-(TU.Test.D.Size.X/2));
+	TU.Test.D.Position.Y = ((love.graphics.getHeight()/2)-(TU.Test.D.Size.Y/2))+140;
 end
 
 

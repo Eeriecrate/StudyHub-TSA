@@ -217,7 +217,7 @@ function love.draw()
 			love.graphics.rectangle("fill",TestUI.takeTest.Confirm.Position.X,TestUI.takeTest.Confirm.Position.Y,TestUI.takeTest.Confirm.Size.X,TestUI.takeTest.Confirm.Size.Y);
 			love.graphics.setColor( 0,0,0,225)
 			love.graphics.print(TestUI.takeTest.Confirm.Text, ((TestUI.takeTest.Confirm.Position.X+(TestUI.takeTest.Confirm.Size.X/2))-love.graphics.getFont():getWidth(TestUI.takeTest.Confirm.Text)/2), TestUI.takeTest.Confirm.Position.Y+4);				
-		elseif TU.Test.Visible then
+		elseif TU.Test.Visible and TU.Test.Counter <= 0 then
 			love.graphics.setColor( 255/1.5,127/1.5,39/1.5,225);
 			love.graphics.rectangle("fill",TestUI.Test.Frame.Position.X-3,TestUI.Test.Frame.Position.Y-3,TestUI.Test.Frame.Size.X+6,TestUI.Test.Frame.Size.Y+6);
 			love.graphics.setColor( 255,127,39,225);
@@ -225,7 +225,35 @@ function love.draw()
 			love.graphics.setColor( 159,82,31,255/4 );
 			love.graphics.rectangle("fill",TestUI.Test.A.Position.X,TestUI.Test.A.Position.Y,TestUI.Test.A.Size.X,TestUI.Test.A.Size.Y);
 			love.graphics.setColor( 0,0,0,225)
-			love.graphics.print(TestUI.takeTest.Next.Text, ((TestUI.Test.A.Position.X+(TestUI.Test.A.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Test.A.Text)/2), TestUI.Test.A.Position.Y+4);
+			love.graphics.print(TestUI.Test.A.Text, ((TestUI.Test.A.Position.X+(TestUI.Test.A.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Test.A.Text)/2), TestUI.Test.A.Position.Y+4);
+
+			love.graphics.setColor( 159,82,31,255/4 );
+			love.graphics.rectangle("fill",TestUI.Test.B.Position.X,TestUI.Test.B.Position.Y,TestUI.Test.B.Size.X,TestUI.Test.B.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.Test.B.Text, ((TestUI.Test.B.Position.X+(TestUI.Test.B.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Test.B.Text)/2), TestUI.Test.B.Position.Y+4);
+
+			love.graphics.setColor( 159,82,31,255/4 );
+			love.graphics.rectangle("fill",TestUI.Test.C.Position.X,TestUI.Test.C.Position.Y,TestUI.Test.C.Size.X,TestUI.Test.C.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.Test.C.Text, ((TestUI.Test.C.Position.X+(TestUI.Test.C.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Test.C.Text)/2), TestUI.Test.C.Position.Y+4);
+
+			love.graphics.setColor( 159,82,31,255/4 );
+			love.graphics.rectangle("fill",TestUI.Test.D.Position.X,TestUI.Test.D.Position.Y,TestUI.Test.D.Size.X,TestUI.Test.D.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.Test.D.Text, ((TestUI.Test.D.Position.X+(TestUI.Test.D.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Test.D.Text)/2), TestUI.Test.D.Position.Y+4);
+
+			love.graphics.setColor( 159,82,31,255/4 );
+			love.graphics.rectangle("fill",TestUI.Test.Question.Position.X,TestUI.Test.Question.Position.Y,TestUI.Test.Question.Size.X,TestUI.Test.Question.Size.Y);
+			love.graphics.setColor( 0,0,0,225)
+			love.graphics.print(TestUI.Test.Question.Text, ((TestUI.Test.Question.Position.X+(TestUI.Test.Question.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Test.Question.Text)/2), TestUI.Test.Question.Position.Y+100);
+		elseif TU.Results.Visible then
+
+		love.graphics.setColor( 255/1.5,127/1.5,39/1.5,225);
+		love.graphics.rectangle("fill",TestUI.Results.Frame.Position.X-3,TestUI.Results.Frame.Position.Y-3,TestUI.Results.Frame.Size.X+6,TestUI.Results.Frame.Size.Y+6);
+		love.graphics.setColor( 255,127,39,225);
+		love.graphics.rectangle("fill",TestUI.Results.Frame.Position.X,TestUI.Results.Frame.Position.Y,TestUI.Results.Frame.Size.X,TestUI.Results.Frame.Size.Y);
+		love.graphics.setColor( 0,0,0,225)
+		love.graphics.print(TestUI.Results.Frame.Text, ((TestUI.Results.Frame.Position.X+(TestUI.Results.Frame.Size.X/2))-love.graphics.getFont():getWidth(TestUI.Results.Frame.Text)/2), TestUI.Results.Frame.Position.Y+2);
 
 		else
 			love.graphics.setColor(255,255,255,255/2)
@@ -233,6 +261,7 @@ function love.draw()
 
 		end
 	end
+	TU.Test.Counter = TU.Test.Counter - 1;
 end
 
 function love.textinput(t)
